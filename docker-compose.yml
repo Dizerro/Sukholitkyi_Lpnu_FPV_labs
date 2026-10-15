@@ -1,0 +1,24 @@
+services:
+  sim:
+    build:
+      context: .
+      args:
+        HOST_UID: ${HOST_UID:-1000}
+        HOST_GID: ${HOST_GID:-1000}
+    image: fpv-lab2:humble
+    container_name: fpv-sim
+    network_mode: host
+    ipc: host
+    stdin_open: true
+    tty: true
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ./fpv_labs:/home/student/fpv_labs
+    devices:
+      - /dev/dri:/dev/dri
+    group_add:
+      - "992"
+      - "44"

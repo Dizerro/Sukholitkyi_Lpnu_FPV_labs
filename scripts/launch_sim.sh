@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Start Gazebo + ArduPilot SITL + ROS 2 DDS bridge (foreground; Ctrl+C stops it)
+cd "$(dirname "$0")/.."
+docker compose exec sim bash -lc \
+  "source /opt/ros/humble/setup.bash && source /opt/ardu_ws/install/setup.bash && export GZ_SIM_RESOURCE_PATH=\$GZ_SIM_RESOURCE_PATH:/opt/ardu_ws/install/ardupilot_gazebo/share && ros2 launch ardupilot_gz_bringup iris_maze.launch.py"

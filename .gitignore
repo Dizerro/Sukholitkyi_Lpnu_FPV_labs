@@ -1,0 +1,6 @@
+fpv_labs/build/
+fpv_labs/install/
+fpv_labs/log/
+build.log
+fpv_labs/logs/
+sim.log
