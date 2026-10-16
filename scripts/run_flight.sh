@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# Usage: ./scripts/run_flight.sh DX DY   (offsets from Table 2.3)
 cd "$(dirname "$0")/.."
 DX=${1:-4.0}
 DY=${2:-0.0}

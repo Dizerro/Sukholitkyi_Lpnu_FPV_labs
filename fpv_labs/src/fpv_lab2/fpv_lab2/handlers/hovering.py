@@ -13,10 +13,10 @@ class HoveringHandler(FlightStateHandler):
         if node.status is None or not node.status.armed:
             node.fail("Drone disarmed unexpectedly during flight")
             return
-        if node.odometry is not None:
-            altitude = node.odometry.pose.pose.position.z
-            node.get_logger().debug(f"Gazebo altitude: {altitude:.2f} m")
         elapsed = time.monotonic() - node.hover_started_at
         if elapsed >= node.HOVER_DURATION:
-            node.get_logger().info("Hover completed, starting landing")
-            node.state = FlightState.LANDING
+            if node.target_xy is None:
+                node.fail("No odometry received, cannot navigate")
+                return
+            node.get_logger().info("Hover completed, navigating to target")
+            node.state = FlightState.NAVIGATING
